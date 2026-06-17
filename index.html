@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aditya Vijay — Game Mathematician & Slot Designer</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script>tailwind.config = { theme: { extend: { fontFamily: { sans: ['Inter','sans-serif'] } } } }</script>
+  <style>
+    * { box-sizing: border-box; }
+    body { font-family:'Inter',sans-serif; letter-spacing:-0.02em; -webkit-font-smoothing:antialiased; }
+
+    /* Hero gradient */
+    .hero-gradient {
+      background:
+        radial-gradient(ellipse 90% 80% at 10% 55%, rgba(134,239,172,.38) 0%, transparent 60%),
+        radial-gradient(ellipse 80% 75% at 90% 25%, rgba(253,186,116,.30) 0%, transparent 60%),
+        radial-gradient(ellipse 80% 70% at 55% 90%, rgba(147,197,253,.28) 0%, transparent 60%),
+        radial-gradient(ellipse 70% 60% at 50%  5%, rgba(253,224,71, .22) 0%, transparent 55%),
+        radial-gradient(ellipse 60% 55% at 92% 90%, rgba(196,181,253,.25) 0%, transparent 55%),
+        #ffffff;
+    }
+
+    /* CTA buttons */
+    .btn-primary {
+      display:inline-flex; align-items:center; gap:.35rem;
+      background:#000; color:#fff; font-size:.875rem; font-weight:500;
+      padding:.55rem 1.25rem; border-radius:999px;
+      transition:opacity .15s;
+    }
+    .btn-primary:hover { opacity:.75; }
+    .btn-secondary {
+      display:inline-flex; align-items:center; gap:.35rem;
+      background:transparent; color:#000; font-size:.875rem; font-weight:500;
+      padding:.55rem 1.25rem; border-radius:999px;
+      border:1.5px solid rgba(0,0,0,.2);
+      transition:border-color .15s, background .15s;
+    }
+    .btn-secondary:hover { border-color:#000; background:rgba(0,0,0,.04); }
+
+    /* Section label */
+    .section-label { font-size:.65rem; letter-spacing:.12em; text-transform:uppercase; color:#a3a3a3; }
+
+    /* Studio pill */
+    .studio-pill {
+      display:inline-block; font-size:.6rem; font-weight:600;
+      letter-spacing:.08em; text-transform:uppercase;
+      padding:.18rem .55rem; border-radius:999px;
+    }
+
+    /* Game card (commercial grid) */
+    .game-card {
+      display:flex; flex-direction:column; justify-content:space-between;
+      background:#fff; border:1px solid #e5e5e5; border-radius:.75rem;
+      padding:1rem; transition:box-shadow .2s, border-color .2s;
+      text-decoration:none; color:inherit;
+    }
+    .game-card:hover { box-shadow:0 4px 20px rgba(0,0,0,.08); border-color:#d4d4d4; }
+    .game-card .game-link {
+      font-size:.7rem; font-weight:600; letter-spacing:.04em;
+      text-transform:uppercase; color:#737373;
+      margin-top:.75rem; display:inline-block;
+      transition:color .15s;
+    }
+    .game-card:hover .game-link { color:#000; }
+
+    /* Process step */
+    .process-step { padding:1.25rem 0; border-top:1px solid #e5e5e5; }
+    .process-step:first-child { border-top:none; }
+
+    /* Signature design article */
+    .sig-article {
+      background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.1);
+      border-radius:.75rem; padding:1.5rem;
+    }
+    .sig-article h3 { color:#fff; font-size:1rem; font-weight:600; margin-bottom:.35rem; }
+    .sig-article .inspiration { font-size:.7rem; color:#a3a3a3; margin-bottom:.75rem; text-transform:uppercase; letter-spacing:.06em; }
+    .sig-article ul { padding-left:1rem; margin:.5rem 0; }
+    .sig-article li { font-size:.75rem; color:#d4d4d4; line-height:1.6; }
+    .sig-article .contributions li { color:#a3a3a3; font-style:italic; }
+    .sig-article .vid-link {
+      display:inline-flex; align-items:center; gap:.3rem;
+      font-size:.75rem; font-weight:500; color:#fbbf24;
+      border-bottom:1px solid rgba(251,191,36,.4); padding-bottom:.1rem;
+      margin-top:.75rem; transition:border-color .15s;
+    }
+    .sig-article .vid-link:hover { border-color:#fbbf24; }
+
+    /* Series card */
+    .series-card {
+      background:rgba(255,255,255,.08); border:1px solid rgba(255,220,80,.2);
+      border-radius:.75rem; padding:1.25rem; transition:background .2s;
+    }
+    .series-card:hover { background:rgba(255,255,255,.12); }
+
+    /* Original game card */
+    .orig-card {
+      display:flex; flex-direction:column; justify-content:space-between;
+      border-left:3px solid #10b981; background:#f0fdf4;
+      border-radius:0 .75rem .75rem 0; padding:1rem;
+      transition:background .2s;
+    }
+    .orig-card:hover { background:#dcfce7; }
+
+    /* Instant win card */
+    .iw-card {
+      display:flex; flex-direction:column; justify-content:space-between;
+      background:#f0f9ff; border:1px solid #bae6fd;
+      border-radius:.75rem; padding:1rem; transition:background .2s;
+    }
+    .iw-card:hover { background:#e0f2fe; }
+
+    /* Floating icons (CTA section) */
+    .cursor-icon { position:absolute; width:36px; height:36px; opacity:.75; }
+    @keyframes float1 { 0%,100%{transform:translateY(0) rotate(-10deg)} 50%{transform:translateY(-8px) rotate(-10deg)} }
+    @keyframes float2 { 0%,100%{transform:translateY(0) rotate(15deg)}  50%{transform:translateY(-12px) rotate(15deg)} }
+    @keyframes float3 { 0%,100%{transform:translateY(0) rotate(-5deg)}  50%{transform:translateY(-6px) rotate(-5deg)} }
+    .f1{animation:float1 3.2s ease-in-out infinite}
+    .f2{animation:float2 4s ease-in-out infinite .5s}
+    .f3{animation:float3 3.5s ease-in-out infinite 1s}
+    .f4{animation:float1 4.2s ease-in-out infinite 1.5s}
+    .f5{animation:float2 3.8s ease-in-out infinite .8s}
+    .f6{animation:float3 4.5s ease-in-out infinite .3s}
+    .f7{animation:float1 3.6s ease-in-out infinite 2s}
+    .f8{animation:float2 4.8s ease-in-out infinite 1.2s}
+  </style>
+</head>
+<body class="bg-white text-black overflow-x-hidden">
+
+<!-- ══════════════════════════════════════════
+     1. NAV
+══════════════════════════════════════════ -->
+<nav class="flex items-center justify-between px-8 py-5 bg-white sticky top-0 z-50 border-b border-neutral-100/80 backdrop-blur-sm">
+  <a href="#" class="text-base font-medium tracking-tight">Aditya Vijay</a>
+  <div class="hidden md:flex items-center gap-7 text-sm">
+    <a href="#about"   class="hover:opacity-60 transition-opacity">About</a>
+    <a href="#process" class="hover:opacity-60 transition-opacity">Process</a>
+    <a href="#games"   class="hover:opacity-60 transition-opacity">Games</a>
+    <a href="#contact" class="hover:opacity-60 transition-opacity">Contact</a>
+  </div>
+  <button class="text-2xl font-light leading-none hover:opacity-60 transition-opacity">+</button>
+</nav>
+
+
+<!-- ══════════════════════════════════════════
+     2. HERO
+══════════════════════════════════════════ -->
+<section class="hero-gradient px-6 pt-20 pb-24 text-center">
+  <h1 class="text-4xl md:text-5xl font-normal leading-[1.15] tracking-tight max-w-xl mx-auto mb-5" style="letter-spacing:-0.025em;">
+    I design the <strong class="font-semibold">mathematics</strong> that power<br>
+    modern <strong class="font-semibold">slot games,</strong> jackpot<br>
+    systems, and <strong class="font-semibold">RTP models.</strong>
+  </h1>
+  <p class="text-sm text-neutral-500 max-w-lg mx-auto mb-8 leading-relaxed">
+    8-step end-to-end delivery: Feature Design → Mathematical Modelling →
+    Reel Strip Creation → Weight Table Design → RTP Calculations →
+    Monte Carlo Simulations → Validation &amp; Optimisation → Certification Support.
+  </p>
+  <div class="flex items-center justify-center gap-3 flex-wrap">
+    <a href="#case-studies" class="btn-primary">View Case Studies</a>
+    <a href="#contact"      class="btn-secondary">Hire Me</a>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     3. FEATURED CASE STUDIES
+══════════════════════════════════════════ -->
+<section class="px-6 py-10" id="case-studies">
+  <div class="flex items-end justify-between mb-5">
+    <div>
+      <p class="section-label mb-0.5">Featured</p>
+      <h2 class="text-xl font-medium flex items-center gap-1.5">Case Studies <span class="font-normal">↓</span></h2>
+    </div>
+    <a href="#games" class="text-sm hover:opacity-60 transition-opacity">All work →</a>
+  </div>
+
+  <!-- Sun of Egypt — hero card -->
+  <div class="relative rounded-2xl overflow-hidden mb-3" style="height:420px; background:radial-gradient(ellipse 120% 60% at 50% 110%, #b45309 0%, #78350f 30%, #1c0a00 60%, #0a0500 100%);">
+    <div class="absolute inset-0" style="background-image:radial-gradient(1px 1px at 15% 20%,rgba(255,220,120,.7) 0%,transparent 100%),radial-gradient(1px 1px at 35% 10%,rgba(255,255,200,.5) 0%,transparent 100%),radial-gradient(1.5px 1.5px at 55% 25%,rgba(255,220,100,.6) 0%,transparent 100%),radial-gradient(1px 1px at 70% 8%,rgba(255,255,220,.5) 0%,transparent 100%),radial-gradient(1px 1px at 85% 18%,rgba(255,200,80,.6) 0%,transparent 100%),radial-gradient(1px 1px at 25% 35%,rgba(255,255,180,.4) 0%,transparent 100%),radial-gradient(1px 1px at 80% 30%,rgba(255,220,120,.5) 0%,transparent 100%),radial-gradient(2px 2px at 90% 12%,rgba(255,240,160,.8) 0%,transparent 100%),radial-gradient(1px 1px at 10% 45%,rgba(255,200,100,.4) 0%,transparent 100%),radial-gradient(1px 1px at 60% 5%,rgba(255,255,200,.6) 0%,transparent 100%);"></div>
+    <div class="absolute" style="width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,rgba(253,224,71,.35) 0%,rgba(245,158,11,.2) 40%,transparent 70%);top:5%;left:50%;transform:translateX(-50%);"></div>
+    <div class="absolute inset-0" style="background:radial-gradient(ellipse 100% 40% at 50% 100%,rgba(180,100,10,.6) 0%,transparent 60%);"></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-transparent"></div>
+    <div class="absolute bottom-0 left-0 p-8 text-white">
+      <p class="text-xs text-amber-400/80 uppercase tracking-widest mb-2">3 Oaks Gaming</p>
+      <h3 class="text-2xl font-medium mb-3">Sun of Egypt Series</h3>
+      <p class="text-sm text-neutral-300 max-w-sm leading-relaxed">
+        Hold &amp; Win balancing, jackpot frequency design, RTP verification, feature simulations, and volatility tuning across the Sun of Egypt 3 and Sun of Egypt 4 series.
+      </p>
+      <div class="flex items-center gap-4 mt-5">
+        <a href="https://3oaks.com/game/sun_of_egypt_3" target="_blank" rel="noopener" class="text-sm text-white border-b border-white/60 pb-0.5 hover:border-white transition-colors">Sun of Egypt 3 ↗</a>
+        <a href="https://3oaks.com/game/sun_of_egypt_4w" target="_blank" rel="noopener" class="text-sm text-white border-b border-white/60 pb-0.5 hover:border-white transition-colors">Sun of Egypt 4 ↗</a>
+      </div>
+    </div>
+    <div class="absolute top-6 right-6">
+      <span class="text-xs text-amber-400/70 uppercase tracking-wider">Hold &amp; Win</span>
+    </div>
+  </div>
+
+  <!-- 3 Hot Chillies + Wanted Dead — side by side -->
+  <div class="grid grid-cols-2 gap-3">
+    <div class="relative rounded-xl overflow-hidden bg-neutral-900" style="height:220px;">
+      <div class="absolute inset-0" style="background:linear-gradient(135deg,rgba(180,30,10,.5) 0%,rgba(20,0,0,.7) 100%);"></div>
+      <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+      <div class="absolute bottom-0 left-0 p-5 text-white">
+        <p class="text-xs text-red-400/80 uppercase tracking-widest mb-1.5">3 Oaks Gaming</p>
+        <h3 class="text-base font-medium mb-1.5">3 Hot Chillies</h3>
+        <p class="text-xs text-neutral-400 leading-relaxed">Complete mathematical recreation for 3 Oaks Gaming: RTP design, reel generation, feature balancing, and simulation validation.</p>
+        <a href="https://3oaks.com/game/3_hot_chillies" target="_blank" rel="noopener" class="inline-block mt-3 text-xs text-white border-b border-white/50 pb-0.5 hover:border-white transition-colors">Play / View Game ↗</a>
+      </div>
+    </div>
+    <div class="relative rounded-xl overflow-hidden bg-neutral-900" style="height:220px;">
+      <div class="absolute inset-0" style="background:linear-gradient(135deg,rgba(60,50,30,.5) 0%,rgba(10,8,5,.7) 100%);"></div>
+      <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+      <div class="absolute bottom-0 left-0 p-5 text-white">
+        <p class="text-xs text-yellow-600/80 uppercase tracking-widest mb-1.5">Hacksaw Gaming</p>
+        <h3 class="text-base font-medium mb-1.5">Wanted Dead or a Wild</h3>
+        <p class="text-xs text-neutral-400 leading-relaxed">Feature recreation, bonus mathematics, RTP balancing, and simulation validation for Hacksaw Gaming.</p>
+        <a href="https://www.hacksawgaming.com/games/wanted-dead-or-a-wild" target="_blank" rel="noopener" class="inline-block mt-3 text-xs text-white border-b border-white/50 pb-0.5 hover:border-white transition-colors">Play / View Game ↗</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     4. EXPERTISE
+══════════════════════════════════════════ -->
+<section class="px-6 py-16 text-center" id="about">
+  <p class="text-2xl font-normal leading-snug mb-10" style="letter-spacing:-0.02em;">
+    Specialized expertise across <strong class="font-semibold">multiple disciplines</strong> in casino game mathematics, including:
+  </p>
+  <div class="flex flex-wrap items-center justify-center gap-x-8 gap-y-4 max-w-2xl mx-auto">
+    <span class="text-sm font-medium text-neutral-400 hover:text-black transition-colors cursor-default">Feature Design</span>
+    <span class="text-sm font-medium text-neutral-400 hover:text-black transition-colors cursor-default">RTP Design</span>
+    <span class="text-sm font-medium text-neutral-400 hover:text-black transition-colors cursor-default">Monte Carlo Simulations</span>
+    <span class="text-sm font-medium text-neutral-400 hover:text-black transition-colors cursor-default">Reel Strip Generation</span>
+    <span class="text-sm font-medium text-neutral-400 hover:text-black transition-colors cursor-default">Volatility Tuning</span>
+    <span class="text-sm font-medium text-neutral-400 hover:text-black transition-colors cursor-default">Feature Balancing</span>
+    <span class="text-sm font-medium text-neutral-400 hover:text-black transition-colors cursor-default">Mathematical Validation</span>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     5. DEVELOPMENT PROCESS
+══════════════════════════════════════════ -->
+<section class="px-6 py-16 bg-neutral-50" id="process">
+  <div class="max-w-4xl mx-auto">
+    <p class="section-label mb-2">How I Work</p>
+    <h2 class="text-3xl font-medium mb-2" style="letter-spacing:-0.025em;">Development Process</h2>
+    <p class="text-sm text-neutral-500 mb-10">Every game follows an 8-stage structured delivery pipeline.</p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-0">
+      <div class="process-step pr-8">
+        <p class="text-2xl font-bold text-amber-500 mb-1">01</p>
+        <h4 class="text-sm font-semibold mb-1">Feature Design</h4>
+        <p class="text-xs text-neutral-500 leading-relaxed">Conceive mechanics, bonus structures, and player interactions.</p>
+      </div>
+      <div class="process-step md:pl-8">
+        <p class="text-2xl font-bold text-amber-500 mb-1">02</p>
+        <h4 class="text-sm font-semibold mb-1">Mathematical Modelling</h4>
+        <p class="text-xs text-neutral-500 leading-relaxed">Build probability models for every game state and outcome.</p>
+      </div>
+      <div class="process-step pr-8">
+        <p class="text-2xl font-bold text-amber-500 mb-1">03</p>
+        <h4 class="text-sm font-semibold mb-1">RTP Calculations</h4>
+        <p class="text-xs text-neutral-500 leading-relaxed">Calculate theoretical return, hit frequency, and volatility index.</p>
+      </div>
+      <div class="process-step md:pl-8">
+        <p class="text-2xl font-bold text-amber-500 mb-1">04</p>
+        <h4 class="text-sm font-semibold mb-1">Reel Strip Creation</h4>
+        <p class="text-xs text-neutral-500 leading-relaxed">Design reel strips to achieve target symbol frequencies.</p>
+      </div>
+      <div class="process-step pr-8">
+        <p class="text-2xl font-bold text-amber-500 mb-1">05</p>
+        <h4 class="text-sm font-semibold mb-1">Weight Table Design</h4>
+        <p class="text-xs text-neutral-500 leading-relaxed">Set symbol weights per reel to fine-tune win distributions.</p>
+      </div>
+      <div class="process-step md:pl-8">
+        <p class="text-2xl font-bold text-amber-500 mb-1">06</p>
+        <h4 class="text-sm font-semibold mb-1">Monte Carlo Simulations</h4>
+        <p class="text-xs text-neutral-500 leading-relaxed">Run billions of game rounds to validate mathematical models.</p>
+      </div>
+      <div class="process-step pr-8">
+        <p class="text-2xl font-bold text-amber-500 mb-1">07</p>
+        <h4 class="text-sm font-semibold mb-1">Validation &amp; Optimisation</h4>
+        <p class="text-xs text-neutral-500 leading-relaxed">Cross-check simulation output against target specs; iterate until exact.</p>
+      </div>
+      <div class="process-step md:pl-8">
+        <p class="text-2xl font-bold text-amber-500 mb-1">08</p>
+        <h4 class="text-sm font-semibold mb-1">Certification Support</h4>
+        <p class="text-xs text-neutral-500 leading-relaxed">Provide technical documentation for regulatory certification.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     6. COMMERCIAL WORK — 16-game grid
+══════════════════════════════════════════ -->
+<section class="px-6 py-16" id="games">
+  <p class="section-label mb-2">Portfolio</p>
+  <h2 class="text-3xl font-medium mb-2" style="letter-spacing:-0.025em;">Commercial Work</h2>
+  <p class="text-sm text-neutral-500 mb-8">Original mathematical models inspired by titles from leading iGaming studios —</p>
+
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+
+    <a href="https://www.pragmaticplay.com/en/games/gates-of-olympus/" target="_blank" rel="noopener" class="game-card">
+      <div><span class="studio-pill bg-purple-100 text-purple-700">Pragmatic Play</span></div>
+      <div>
+        <p class="text-sm font-semibold mt-2 mb-1">Gates of Olympus</p>
+        <p class="text-xs text-neutral-500 leading-relaxed">Mathematical modelling and RTP design.</p>
+      </div>
+      <span class="game-link">View Game ↗</span>
+    </a>
+
+    <a href="https://www.pragmaticplay.com/en/games/gates-of-olympus-super-scatter/" target="_blank" rel="noopener" class="game-card">
+      <div><span class="studio-pill bg-purple-100 text-purple-700">Pragmatic Play</span></div>
+      <div>
+        <p class="text-sm font-semibold mt-2 mb-1">Gates of Olympus Super Scatter</p>
+        <p class="text-xs text-neutral-500 leading-relaxed">Mathematical modelling and RTP design.</p>
+      </div>
+      <span class="game-link">View Game ↗</span>
+    </a>
+
+    <a href="https://3oaks.com/game/sun_of_egypt_3" target="_blank" rel="noopener" class="game-card">
+      <div><span class="studio-pill bg-amber-100 text-amber-700">3 Oaks Gaming</span></div>
+      <div>
+        <p class="text-sm font-semibold mt-2 mb-1">Sun of Egypt 3</p>
+        <p class="text-xs text-neutral-500 leading-relaxed">Hold &amp; Win mathematics, jackpot balancing, RTP verification, feature simulations.</p>
+      </div>
+      <span class="game-link">View Game ↗</span>
+    </a>
+
+    <a href="https://3oaks.com/game/sun_of_egypt_4w" target="_blank" rel="noopener" class="game-card">
+      <div><span class="studio-pill bg-amber-100 text-amber-700">3 Oaks Gaming</span></div>
+      <div>
+        <p class="text-sm font-semibold mt-2 mb-1">Sun of Egypt 4</p>
+        <p class="text-xs text-neutral-500 leading-relaxed">Bonus feature modelling, jackpot frequency design, RTP balancing.</p>
+      </div>
+      <span class="game-link">View Game ↗</span>
+    </a>
+
+    <a href="https://3oaks.com/game/3_hot_chillies" target="_blank" rel="noopener" class="game-card">
+      <div><span class="studio-pill bg-amber-100 text-amber-700">3 Oaks Gaming</span></div>
+      <div>
+        <p class="text-sm font-semibold mt-2 mb-1">3 Hot Chillies</p>
+        <p class="text-xs text-neutral-500 leading-relaxed">Complete mathematical recreation, RTP design, reel generation, feature balancing, simulation validation.</p>
+      </div>
+      <span class="game-link">View Game ↗</span>
+    </a>
+
+    <a href="https://www.hacksawgaming.com/games/wanted-dead-or-a-wild" target="_blank" rel="noopener" class="game-card">
+      <div><span class="studio-pill bg-neutral-100 text-neutral-700">Hacksaw Gaming</span></div>
+      <div>
+        <p class="text-sm font-semibold mt-2 mb-1">Wanted Dead or a Wild</p>
+        <p class="text-xs text-neutral-500 leading-relaxed">Feature recreation, bonus mathematics, RTP balancing, simulation validation.</p>
+      </div>
+      <span class="game-link">View Game ↗</span>
+    </a>
+
+    <a href="https://www.vegasslotsonline.com/light-and-wonder/rich-little-piggies-hog-wild/" target="_blank" rel="noopener" class="game-card">
+      <div><span class="studio-pill bg-blue-100 text-blue-700">Light &amp; Wonder</span></div>
+      <div>
+        <p class="text-sm font-semibold mt-2 mb-1">Rich Little Piggies Hog Wild</p>
+        <p class="text-xs text-neutral-500 leading-relaxed">Feature mathematics, RTP balancing, jackpot modelling.</p>
+      </div>
+      <span class="game-link">View Game ↗</span>
+    </a>
+
+    <a href="https://slotcatalog.com/en/slots/age-of-the-gods-cash-collect" target="_blank" rel="noopener" class="game-card">
+      <div><span class="studio-pill bg-red-100 text-red-700">Playtech</span></div>
+      <div>
+        <p class="text-sm font-semibold mt-2 mb-1">Age of the Gods: Cash Collect</p>
+        <p class="text-xs text-neutral-500 leading-relaxed">Cash Collect mathematics, jackpot balancing, simulation validation.</p>
+      </div>
+      <span class="game-link">View Game ↗</span>
+    </a>
+
+    <a href="https://slotslaunch.com/playtech/azteca-cash-collect" target="_blank" rel="noopener" class="game-card">
+      <div><span class="studio-pill bg-red-100 text-red-700">Playtech</span></div>
+      <div>
+        <p class="text-sm font-semibold mt-2 mb-1">Azteca Cash Collect</p>
+        <p class="text-xs text-neutral-500 leading-relaxed">Cash Collect mechanics, jackpot balancing, simulation validation.</p>
+      </div>
+      <span class="game-link">View Game ↗</span>
+    </a>
+
+    <a href="https://slotslaunch.com/playtech/piggies-and-the-bank-cashcollect-link" target="_blank" rel="noopener" class="game-card">
+      <div><span class="studio-pill bg-red-100 text-red-700">Playtech</span></div>
+      <div>
+        <p class="text-sm font-semibold mt-2 mb-1">Piggies &amp; the Bank Cash Collect &amp; Link</p>
+        <p class="text-xs text-neutral-500 leading-relaxed">Link &amp; Collect feature design, RTP balancing, jackpot mathematics.</p>
+      </div>
+      <span class="game-link">View Game ↗</span>
+    </a>
+
+    <a href="https://slotcatalog.com/en/slots/cash-spree-phoenix" target="_blank" rel="noopener" class="game-card">
+      <div><span class="studio-pill bg-red-100 text-red-700">Playtech</span></div>
+      <div>
+        <p class="text-sm font-semibold mt-2 mb-1">Cash Spree Phoenix</p>
+        <p class="text-xs text-neutral-500 leading-relaxed">Mathematical modelling and RTP design.</p>
+      </div>
+      <span class="game-link">View Game ↗</span>
+    </a>
+
+    <a href="https://eclipsegamingsystems.com/games/chicken-pop/" target="_blank" rel="noopener" class="game-card">
+      <div><span class="studio-pill bg-green-100 text-green-700">Eclipse Gaming</span></div>
+      <div>
+        <p class="text-sm font-semibold mt-2 mb-1">Chicken Pop</p>
+        <p class="text-xs text-neutral-500 leading-relaxed">Full mathematical model and RTP calculations.</p>
+      </div>
+      <span class="game-link">View Game ↗</span>
+    </a>
+
+    <a href="https://www.demoslotsfun.com/slots/fortune-tiger-demo-slot" target="_blank" rel="noopener" class="game-card">
+      <div><span class="studio-pill bg-orange-100 text-orange-700">PG Soft</span></div>
+      <div>
+        <p class="text-sm font-semibold mt-2 mb-1">Fortune Tiger</p>
+        <p class="text-xs text-neutral-500 leading-relaxed">Mathematical modelling and RTP design.</p>
+      </div>
+      <span class="game-link">View Game ↗</span>
+    </a>
+
+    <a href="https://amusnetgaming.com/games/online-casino/shining-crown" target="_blank" rel="noopener" class="game-card">
+      <div><span class="studio-pill bg-neutral-100 text-neutral-700">Amusnet</span></div>
+      <div>
+        <p class="text-sm font-semibold mt-2 mb-1">Shining Crown</p>
+        <p class="text-xs text-neutral-500 leading-relaxed">Mathematical modelling and RTP verification.</p>
+      </div>
+      <span class="game-link">View Game ↗</span>
+    </a>
+
+    <a href="https://slotcatalog.com/en/slots/Wild-27" target="_blank" rel="noopener" class="game-card">
+      <div><span class="studio-pill bg-neutral-100 text-neutral-700">Portfolio</span></div>
+      <div>
+        <p class="text-sm font-semibold mt-2 mb-1">Wild 27</p>
+        <p class="text-xs text-neutral-500 leading-relaxed">Mathematical modelling and RTP design.</p>
+      </div>
+      <span class="game-link">View Game ↗</span>
+    </a>
+
+    <a href="https://www.vegasslotsonline.com/amatic/hot-fruits-40/" target="_blank" rel="noopener" class="game-card">
+      <div><span class="studio-pill bg-red-100 text-red-700">AMATIC</span></div>
+      <div>
+        <p class="text-sm font-semibold mt-2 mb-1">Hot Fruits 40</p>
+        <p class="text-xs text-neutral-500 leading-relaxed">Mathematical modelling and RTP design.</p>
+      </div>
+      <span class="game-link">View Game ↗</span>
+    </a>
+
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     8. SIGNATURE DESIGNS
+══════════════════════════════════════════ -->
+<section class="px-6 py-14 bg-neutral-900" id="signature-designs">
+  <div class="max-w-4xl mx-auto">
+    <p class="section-label text-white/30 mb-2">Original Work</p>
+    <h2 class="text-2xl font-medium text-white mb-2" style="letter-spacing:-0.02em;">Signature Designs</h2>
+    <p class="text-sm text-neutral-400 mb-8">Original mathematical architectures — each a complete design from concept to validated model.</p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+      <article class="sig-article">
+        <h3>Hold &amp; Spin — Progressive Collection System</h3>
+        <p class="inspiration">Inspired by Tian Ci Jin Lu</p>
+        <ul class="feature-list">
+          <li>Five-stage Hold &amp; Win progression</li>
+          <li>COLLECT symbol: gathers all visible CASH values, removes collected symbols, increases multiplier up to 5×</li>
+          <li>Jackpot Structure: Mini · Minor · Major · Grand</li>
+          <li>Grand Jackpot awarded when Stage 5 grid is completely filled</li>
+        </ul>
+        <ul class="contributions mt-2">
+          <li>Full mathematical model · RTP calculations · Jackpot balancing · Feature simulations</li>
+        </ul>
+        <a href="https://www.youtube.com/watch?v=mFsE1KqVp7s" target="_blank" rel="noopener" class="vid-link">▶ Watch Gameplay Demo</a>
+      </article>
+
+      <article class="sig-article">
+        <h3>Multi-Screen Link &amp; Win</h3>
+        <p class="inspiration">Inspired by Genie's Link &amp; Win</p>
+        <ul class="feature-list">
+          <li>Wild Nudging &amp; Respin</li>
+          <li>Mystery Symbols</li>
+          <li>Mystery Pot Feature: Coin Shower · Coin Upgrade · Pick Jackpot</li>
+          <li>Multi-Screen Hold &amp; Win — additional locked screens, screen activation mechanic</li>
+          <li>Jackpot Structure: Mini · Minor · Major · Mega · Super · Grand</li>
+        </ul>
+        <ul class="contributions mt-2">
+          <li>Original mathematics · RTP balancing · Feature EV calculations · Jackpot modelling</li>
+        </ul>
+        <a href="https://www.youtube.com/watch?v=87zeA6R-iuc&t=1620s" target="_blank" rel="noopener" class="vid-link">▶ Watch Gameplay Demo</a>
+      </article>
+
+      <article class="sig-article">
+        <h3>Royal Bonus Collection Feature</h3>
+        <p class="inspiration">Inspired by Royal Coins 2</p>
+        <ul class="feature-list">
+          <li>3×3 Line Game format</li>
+          <li>Royal Bonus Symbol: Collects and removes bonus symbols</li>
+          <li>Pile of Gold Trigger: Random Hold &amp; Win entry</li>
+        </ul>
+        <ul class="contributions mt-2">
+          <li>Complete mathematical design · Feature balancing</li>
+        </ul>
+        <a href="https://playson.com/games/run/royal-coins-2-hold-and-win" target="_blank" rel="noopener" class="vid-link">View Reference Game ↗</a>
+      </article>
+
+      <article class="sig-article">
+        <h3>Collector Feature System</h3>
+        <p class="inspiration">Inspired by Money Train 2</p>
+        <ul class="feature-list">
+          <li>Mystery Stack</li>
+          <li>Base Game Collector</li>
+          <li>Hold &amp; Win</li>
+          <li>Increase Symbol</li>
+          <li>Dynamic Coin Collection</li>
+        </ul>
+        <ul class="contributions mt-2">
+          <li>RTP balancing · Feature mathematics · Simulation validation</li>
+        </ul>
+        <a href="https://www.slotstemple.com/free-slots/money-train-2/" target="_blank" rel="noopener" class="vid-link">View Reference Game ↗</a>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     9. GOLD STACKS 88 FAMILY
+══════════════════════════════════════════ -->
+<section class="px-6 py-14" id="gold-stacks" style="background:linear-gradient(160deg,#fffbeb 0%,#fef3c7 50%,#fffbeb 100%);">
+  <div class="max-w-4xl mx-auto">
+    <p class="section-label mb-2" style="color:#92400e;">Game Series</p>
+    <h2 class="text-2xl font-medium mb-2" style="letter-spacing:-0.02em;color:#1c1917;">Gold Stacks 88 Family</h2>
+    <p class="text-sm text-amber-800/70 mb-2">A three-title series with shared mechanics: Mystery Stacks, Wild Nudging, Expanding Wilds, Static Jackpots, and Free Games — each title offering distinct player-choice variants.</p>
+    <p class="text-xs text-amber-700/60 mb-8">&nbsp;</p>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <a href="https://www.youtube.com/watch?v=kusOLt2fvM4" target="_blank" rel="noopener" class="series-card flex flex-col" style="text-decoration:none; min-height:110px;">
+        <div class="flex-1">
+          <h3 class="text-base font-semibold text-amber-900 mb-1">Lunar Festival</h3>
+          <p class="text-xs text-amber-700/70 leading-relaxed">Player choice: more free games OR more wilds.</p>
+        </div>
+        <span class="text-xs font-semibold text-amber-600 mt-4 block">▶ Watch Demo</span>
+      </a>
+      <a href="https://www.youtube.com/watch?v=8Tzuh1xmLGk" target="_blank" rel="noopener" class="series-card flex flex-col" style="text-decoration:none; min-height:110px;">
+        <div class="flex-1">
+          <h3 class="text-base font-semibold text-amber-900 mb-1">Dancing Foo</h3>
+          <p class="text-xs text-amber-700/70 leading-relaxed">Traditional scatter-triggered free games.</p>
+        </div>
+        <span class="text-xs font-semibold text-amber-600 mt-4 block">▶ Watch Demo</span>
+      </a>
+      <a href="https://www.youtube.com/watch?v=dM5D0tkar6c" target="_blank" rel="noopener" class="series-card flex flex-col" style="text-decoration:none; min-height:110px;">
+        <div class="flex-1">
+          <h3 class="text-base font-semibold text-amber-900 mb-1">Tiger Reign</h3>
+          <p class="text-xs text-amber-700/70 leading-relaxed">Player choice between grid sizes, wild quantities, and free game counts.</p>
+        </div>
+        <span class="text-xs font-semibold text-amber-600 mt-4 block">▶ Watch Demo</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     10. ORIGINAL GAMES
+══════════════════════════════════════════ -->
+<section class="px-6 py-14 bg-white" id="original-games">
+  <div class="max-w-4xl mx-auto">
+    <p class="section-label mb-2">Playable Now</p>
+    <h2 class="text-2xl font-medium mb-2" style="letter-spacing:-0.02em;">Original Games</h2>
+    <p class="text-sm text-neutral-500 mb-8">Fully playable in demo mode — designed, mathematically modelled, and balanced from scratch.</p>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+      <a href="https://www.cryptoclub.casino/launch_game.php?game=6907&mode=fun" target="_blank" rel="noopener" class="orig-card" style="text-decoration:none;">
+        <div>
+          <p class="text-xs font-medium text-emerald-600 uppercase tracking-wide mb-1">Original</p>
+          <p class="text-sm font-semibold text-neutral-900 mb-1">Santa's Wild Cascade</p>
+        </div>
+        <span class="text-xs font-semibold text-emerald-700 mt-2">Play Demo ↗</span>
+      </a>
+      <a href="https://www.cryptoclub.casino/launch_game.php?game=6910&mode=fun" target="_blank" rel="noopener" class="orig-card" style="text-decoration:none;">
+        <div>
+          <p class="text-xs font-medium text-emerald-600 uppercase tracking-wide mb-1">Original</p>
+          <p class="text-sm font-semibold text-neutral-900 mb-1">Aztec's Wild Cascade</p>
+        </div>
+        <span class="text-xs font-semibold text-emerald-700 mt-2">Play Demo ↗</span>
+      </a>
+      <a href="https://www.cryptoclub.casino/launch_game.php?game=6913&mode=fun" target="_blank" rel="noopener" class="orig-card" style="text-decoration:none;">
+        <div>
+          <p class="text-xs font-medium text-emerald-600 uppercase tracking-wide mb-1">Original</p>
+          <p class="text-sm font-semibold text-neutral-900 mb-1">Sugar Candyland Powerup Cascade</p>
+        </div>
+        <span class="text-xs font-semibold text-emerald-700 mt-2">Play Demo ↗</span>
+      </a>
+      <a href="https://www.cryptoclub.casino/launch_game.php?game=5038&mode=fun" target="_blank" rel="noopener" class="orig-card" style="text-decoration:none;">
+        <div>
+          <p class="text-xs font-medium text-emerald-600 uppercase tracking-wide mb-1">Original</p>
+          <p class="text-sm font-semibold text-neutral-900 mb-1">Skullz Wild Fiesta</p>
+        </div>
+        <span class="text-xs font-semibold text-emerald-700 mt-2">Play Demo ↗</span>
+      </a>
+      <a href="https://www.cryptoclub.casino/launch_game.php?game=6906&mode=real" target="_blank" rel="noopener" class="orig-card" style="text-decoration:none;">
+        <div>
+          <p class="text-xs font-medium text-emerald-600 uppercase tracking-wide mb-1">Original</p>
+          <p class="text-sm font-semibold text-neutral-900 mb-1">Bon Bon Fiesta</p>
+        </div>
+        <span class="text-xs font-semibold text-emerald-700 mt-2">Play Now ↗</span>
+      </a>
+      <a href="https://www.cryptoclub.casino/launch_game.php?game=6911&mode=fun" target="_blank" rel="noopener" class="orig-card" style="text-decoration:none;">
+        <div>
+          <p class="text-xs font-medium text-emerald-600 uppercase tracking-wide mb-1">Original</p>
+          <p class="text-sm font-semibold text-neutral-900 mb-1">Aztec Quest: Treasures of the Sun</p>
+        </div>
+        <span class="text-xs font-semibold text-emerald-700 mt-2">Play Demo ↗</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     11. INSTANT WIN GAMES
+══════════════════════════════════════════ -->
+<section class="px-6 py-14 bg-sky-50" id="instant-win">
+  <div class="max-w-4xl mx-auto">
+    <p class="section-label mb-2" style="color:#0369a1;">Instant Win</p>
+    <h2 class="text-2xl font-medium mb-2" style="letter-spacing:-0.02em;">Instant Win Games</h2>
+    <p class="text-sm text-sky-700/70 mb-8">Crash games, scratch cards, and instant-win mechanics — full mathematical model and RTP design.</p>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+      <a href="https://www.inout.games/games/chicken-road-2-0" target="_blank" rel="noopener" class="iw-card" style="text-decoration:none;">
+        <div>
+          <p class="text-xs font-semibold text-sky-600 uppercase tracking-wide mb-1">Crash Game</p>
+          <p class="text-sm font-semibold text-neutral-900 mb-1">Chicken Road 2</p>
+          <p class="text-xs text-neutral-500 leading-relaxed">Crash-style game with multiplier progression.</p>
+        </div>
+        <span class="text-xs font-semibold text-sky-700 mt-3 inline-block">Play ↗</span>
+      </a>
+      <a href="https://youtu.be/-K8V-smxoyM?si=xjZTEpxZP7C01y6F" target="_blank" rel="noopener" class="iw-card" style="text-decoration:none;">
+        <div>
+          <p class="text-xs font-semibold text-sky-600 uppercase tracking-wide mb-1">Instant Win</p>
+          <p class="text-sm font-semibold text-neutral-900 mb-1">Lightning Zap</p>
+          <p class="text-xs text-neutral-500 leading-relaxed">Instant win with lightning multiplier mechanic.</p>
+        </div>
+        <span class="text-xs font-semibold text-sky-700 mt-3 inline-block">Watch ↗</span>
+      </a>
+      <a href="https://csgoempire.com/roulette" target="_blank" rel="noopener" class="iw-card" style="text-decoration:none;">
+        <div>
+          <p class="text-xs font-semibold text-sky-600 uppercase tracking-wide mb-1">Instant Win</p>
+          <p class="text-sm font-semibold text-neutral-900 mb-1">Instant Roulette</p>
+          <p class="text-xs text-neutral-500 leading-relaxed">Rapid-play roulette with instant-resolution mechanics.</p>
+        </div>
+        <span class="text-xs font-semibold text-sky-700 mt-3 inline-block">View ↗</span>
+      </a>
+      <div class="iw-card">
+        <div>
+          <p class="text-xs font-semibold text-sky-600 uppercase tracking-wide mb-1">Instant Win</p>
+          <p class="text-sm font-semibold text-neutral-900 mb-1">Bridge Stake</p>
+          <p class="text-xs text-neutral-500 leading-relaxed">Tap &amp; Hold to grow the bridge. Cash out anytime for bet × multiplier. 4 difficulty levels: Easy · Medium · Hard · Hardcore.</p>
+        </div>
+      </div>
+      <a href="https://www.cryptoclub.casino/launch_game.php?game=56910&mode=fun" target="_blank" rel="noopener" class="iw-card" style="text-decoration:none;">
+        <div>
+          <p class="text-xs font-semibold text-sky-600 uppercase tracking-wide mb-1">Scratch Card</p>
+          <p class="text-sm font-semibold text-neutral-900 mb-1">Scratch Card</p>
+          <p class="text-xs text-neutral-500 leading-relaxed">Classic scratch mechanic with RTP-balanced prize distribution.</p>
+        </div>
+        <span class="text-xs font-semibold text-sky-700 mt-3 inline-block">Play Demo ↗</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     12. CTA BANNER
+══════════════════════════════════════════ -->
+<section class="bg-black text-white relative overflow-hidden py-28 px-6 text-center" id="contact">
+  <svg class="cursor-icon f1" style="top:14%;left:7%;"   fill="none" stroke="white" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.042 21.672L13.684 16.6m0 0l-2.51 2.225.569-9.47 5.227 7.917-3.286-.672zM12 2.25V4.5m5.834.166l-1.591 1.591M20.25 10.5H18M7.757 14.743l-1.59 1.59M6 10.5H3.75m4.007-4.243l-1.59-1.59"/></svg>
+  <svg class="cursor-icon f2" style="top:22%;left:20%;"  fill="none" stroke="white" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.042 21.672L13.684 16.6m0 0l-2.51 2.225.569-9.47 5.227 7.917-3.286-.672zM12 2.25V4.5m5.834.166l-1.591 1.591M20.25 10.5H18M7.757 14.743l-1.59 1.59M6 10.5H3.75m4.007-4.243l-1.59-1.59"/></svg>
+  <svg class="cursor-icon f3" style="top:10%;right:18%;" fill="none" stroke="white" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.042 21.672L13.684 16.6m0 0l-2.51 2.225.569-9.47 5.227 7.917-3.286-.672zM12 2.25V4.5m5.834.166l-1.591 1.591M20.25 10.5H18M7.757 14.743l-1.59 1.59M6 10.5H3.75m4.007-4.243l-1.59-1.59"/></svg>
+  <svg class="cursor-icon f4" style="top:55%;right:8%;"  fill="none" stroke="white" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.042 21.672L13.684 16.6m0 0l-2.51 2.225.569-9.47 5.227 7.917-3.286-.672zM12 2.25V4.5m5.834.166l-1.591 1.591M20.25 10.5H18M7.757 14.743l-1.59 1.59M6 10.5H3.75m4.007-4.243l-1.59-1.59"/></svg>
+  <svg class="cursor-icon f5" style="bottom:18%;right:22%;" fill="none" stroke="white" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.042 21.672L13.684 16.6m0 0l-2.51 2.225.569-9.47 5.227 7.917-3.286-.672zM12 2.25V4.5m5.834.166l-1.591 1.591M20.25 10.5H18M7.757 14.743l-1.59 1.59M6 10.5H3.75m4.007-4.243l-1.59-1.59"/></svg>
+  <svg class="cursor-icon f6" style="bottom:14%;left:12%;" fill="none" stroke="white" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.042 21.672L13.684 16.6m0 0l-2.51 2.225.569-9.47 5.227 7.917-3.286-.672zM12 2.25V4.5m5.834.166l-1.591 1.591M20.25 10.5H18M7.757 14.743l-1.59 1.59M6 10.5H3.75m4.007-4.243l-1.59-1.59"/></svg>
+  <svg class="cursor-icon f7" style="top:40%;left:4%;"   fill="none" stroke="white" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.042 21.672L13.684 16.6m0 0l-2.51 2.225.569-9.47 5.227 7.917-3.286-.672zM12 2.25V4.5m5.834.166l-1.591 1.591M20.25 10.5H18M7.757 14.743l-1.59 1.59M6 10.5H3.75m4.007-4.243l-1.59-1.59"/></svg>
+  <svg class="cursor-icon f8" style="top:28%;right:4%;"  fill="none" stroke="white" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.042 21.672L13.684 16.6m0 0l-2.51 2.225.569-9.47 5.227 7.917-3.286-.672zM12 2.25V4.5m5.834.166l-1.591 1.591M20.25 10.5H18M7.757 14.743l-1.59 1.59M6 10.5H3.75m4.007-4.243l-1.59-1.59"/></svg>
+  <div class="relative z-10">
+    <p class="text-lg font-normal mb-1">Slot studios, reach out</p>
+    <a href="mailto:adityavijay0011@gmail.com" class="inline-block text-2xl font-semibold hover:opacity-70 transition-opacity mb-6">Hire Aditya Vijay →</a>
+    <div class="flex items-center justify-center gap-6 text-sm">
+      <a href="mailto:adityavijay0011@gmail.com" class="text-neutral-400 hover:text-white transition-colors border-b border-neutral-600 hover:border-white pb-0.5">adityavijay0011@gmail.com</a>
+      <a href="https://www.linkedin.com/in/aditya-vijay-50015a1a7/" target="_blank" rel="noopener" class="text-neutral-400 hover:text-white transition-colors border-b border-neutral-600 hover:border-white pb-0.5">LinkedIn ↗</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     13. FOOTER
+══════════════════════════════════════════ -->
+<footer class="px-6 py-12 border-t border-neutral-100">
+  <div class="grid grid-cols-3 gap-8 text-sm">
+    <div>
+      <p class="font-medium text-xs uppercase tracking-wider text-neutral-400 mb-3">Contact</p>
+      <div class="space-y-1 text-xs text-neutral-500 leading-relaxed">
+        <p>Email: <a href="mailto:adityavijay0011@gmail.com" class="hover:text-black transition-colors">adityavijay0011@gmail.com</a></p>
+        <p>LinkedIn: <a href="https://www.linkedin.com/in/aditya-vijay-50015a1a7/" target="_blank" rel="noopener" class="underline hover:text-black transition-colors">aditya-vijay ↗</a></p>
+      </div>
+      <p class="font-medium text-xs uppercase tracking-wider text-neutral-400 mt-5 mb-2">Available For</p>
+      <ul class="text-xs text-neutral-500 leading-relaxed space-y-0.5">
+        <li>Slot Mathematics Design</li>
+        <li>RTP Verification</li>
+        <li>Game Simulation</li>
+        <li>Jackpot Modelling</li>
+        <li>Feature Design</li>
+        <li>Consulting</li>
+      </ul>
+    </div>
+    <div>
+      <p class="font-medium text-xs uppercase tracking-wider text-neutral-400 mb-3">Navigation</p>
+      <ul class="text-xs text-neutral-500 space-y-1.5">
+        <li><a href="#case-studies" class="hover:text-black transition-colors">Case Studies</a></li>
+        <li><a href="#about"        class="hover:text-black transition-colors">Expertise</a></li>
+        <li><a href="#process"      class="hover:text-black transition-colors">Development Process</a></li>
+        <li><a href="#games"        class="hover:text-black transition-colors">Commercial Work</a></li>
+        <li><a href="#signature-designs" class="hover:text-black transition-colors">Signature Designs</a></li>
+        <li><a href="#original-games" class="hover:text-black transition-colors">Original Games</a></li>
+        <li><a href="#instant-win"  class="hover:text-black transition-colors">Instant Win</a></li>
+      </ul>
+    </div>
+    <div class="flex justify-end items-start">
+      <button onclick="window.scrollTo({top:0,behavior:'smooth'})" class="w-10 h-10 rounded-full border border-neutral-200 flex items-center justify-center text-sm hover:bg-neutral-50 transition-colors">↑</button>
+    </div>
+  </div>
+  <div class="mt-10 pt-6 border-t border-neutral-100 text-center">
+    <p class="text-3xl font-light text-black" style="letter-spacing:0.08em;">Aditya Vijay</p>
+  </div>
+  <div class="mt-6 pt-4 border-t border-neutral-100 text-center px-4">
+    <p class="text-neutral-400" style="font-size:0.625rem; line-height:1.6; letter-spacing:0.01em;">&#9733; The games displayed on this website are the intellectual property of their respective iGaming providers. Their inclusion is solely for portfolio purposes. Unless expressly stated, I do not claim ownership of, or authorship of, the original mathematical models, game mathematics, or proprietary intellectual property associated with these games.</p>
+  </div>
+</footer>
+
+</body>
+</html>
